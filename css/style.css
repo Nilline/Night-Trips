@@ -2096,27 +2096,6 @@ body.ie ._ibg img {
   letter-spacing: 0.07em;
 }
 
-.testimonials-page__anchor {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-radius: 50%;
-  font-size: 18px;
-  height: 64.92px;
-  color: #fff;
-  background-color: rgba(0, 201, 224, 0.7);
-  position: absolute;
-  right: 17%;
-  bottom: 0;
-  padding: 0 10px;
-}
-
 .card-testimonials {
   font-size: 18px;
   line-height: 188.88889%;
