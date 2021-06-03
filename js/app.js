@@ -141,41 +141,46 @@ if (document.querySelector('.header__search-box')) {
 		// _slideToggle(socialFooterBlock);
 	});
 }
-/*
-// собираем все якоря; устанавливаем время анимации и количество кадров
-const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]')),
-	animationTime = 800,
-	framesCount = 20;
 
-anchors.forEach(function (item) {
-	// каждому якорю присваиваем обработчик события
-	item.addEventListener('click', function (e) {
-		// убираем стандартное поведение
-		e.preventDefault();
-
-		// для каждого якоря берем соответствующий ему элемент и определяем его координату Y
-		let coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset;
-
-		// запускаем интервал, в котором
-		let scroller = setInterval(function () {
-			// считаем на сколько скроллить за 1 такт
-			let scrollBy = coordY / framesCount;
-
-			// если к-во пикселей для скролла за 1 такт больше расстояния до элемента
-			// и дно страницы не достигнуто
-			if (scrollBy > window.pageYOffset - coordY && window.innerHeight + window.pageYOffset < document.body.offsetHeight) {
-				// то скроллим на к-во пикселей, которое соответствует одному такту
-				window.scrollBy(0, scrollBy);
-			} else {
-				// иначе добираемся до элемента и выходим из интервала
-				window.scrollTo(0, coordY);
-				clearInterval(scroller);
-			}
-			// время интервала равняется частному от времени анимации и к-ва кадров
-		}, animationTime / framesCount);
+const iconMenuMy = document.querySelector('.menu__icons');
+const menuBodyMy = document.querySelector('.menu__bodys');
+if (iconMenuMy) {
+	iconMenuMy.addEventListener("click", function (e) {
+		document.body.classList.toggle('_lock');
+		iconMenuMy.classList.toggle('_active');
+		menuBodyMy.classList.toggle('_active');
 	});
-});
-*/
+}
+
+// скролл к обьекту
+
+const menuLinks = document.querySelectorAll('.menu__links[data-goto]');
+
+if (menuLinks.length > 0) {
+	menuLinks.forEach(menuLink => {
+		menuLink.addEventListener("click", onMenuLinkClick);
+	});
+
+	function onMenuLinkClick(e) {
+		const menuLink = e.target;
+		if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
+			const gotoBlock = document.querySelector(menuLink.dataset.goto);
+			const gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset - document.querySelector('header').offsetHeight;
+
+			if (iconMenuMy.classList.contains('_active')) {
+				document.body.classList.remove('_lock');
+				iconMenuMy.classList.remove('_active');
+				menuBodyMy.classList.remove('_active');
+			}
+
+			window.scrollTo({
+				top: gotoBlockValue,
+				behavior: "smooth"
+			});
+			e.preventDefault();
+		}
+	}
+}
 var ua = window.navigator.userAgent;
 var msie = ua.indexOf("MSIE ");
 var isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
@@ -240,24 +245,24 @@ if (location.hash) {
 }
 //=================
 //Menu
-let iconMenu = document.querySelector(".icon-menu");
-if (iconMenu != null) {
-	let delay = 500;
-	let menuBody = document.querySelector(".menu__body");
-	iconMenu.addEventListener("click", function (e) {
-		if (unlock) {
-			body_lock(delay);
-			iconMenu.classList.toggle("_active");
-			menuBody.classList.toggle("_active");
-		}
-	});
-};
-function menu_close() {
-	let iconMenu = document.querySelector(".icon-menu");
-	let menuBody = document.querySelector(".menu__body");
-	iconMenu.classList.remove("_active");
-	menuBody.classList.remove("_active");
-}
+// let iconMenu = document.querySelector(".icon-menu");
+// if (iconMenu != null) {
+// 	let delay = 500;
+// 	let menuBody = document.querySelector(".menu__body");
+// 	iconMenu.addEventListener("click", function (e) {
+// 		if (unlock) {
+// 			body_lock(delay);
+// 			iconMenu.classList.toggle("_active");
+// 			menuBody.classList.toggle("_active");
+// 		}
+// 	});
+// };
+// function menu_close() {
+// 	let iconMenu = document.querySelector(".icon-menu");
+// 	let menuBody = document.querySelector(".menu__body");
+// 	iconMenu.classList.remove("_active");
+// 	menuBody.classList.remove("_active");
+// }
 //=================
 //BodyLock
 function body_lock(delay) {
@@ -1668,7 +1673,7 @@ function scroll_scroll() {
 	let src_value = currentScroll = pageYOffset;
 	let header = document.querySelector('header.header');
 	if (header !== null) {
-		if (src_value > 10) {
+		if (src_value > 50) {
 			header.classList.add('_scroll');
 		} else {
 			header.classList.remove('_scroll');
