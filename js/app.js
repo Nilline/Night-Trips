@@ -138,7 +138,6 @@ if (document.querySelector('.header__search-box')) {
 	searchIcon.addEventListener("click", function (e) {
 		searchInput.classList.toggle('_active');
 		searchIcon.classList.toggle('_active');
-		// _slideToggle(socialFooterBlock);
 	});
 }
 
