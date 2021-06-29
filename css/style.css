@@ -2090,7 +2090,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 
 .header._scroll {
   position: fixed;
-  /* background-color: rgba(8, 69, 136, 0.2); */
+  background-color: rgba(8, 69, 136, 0.15);
   width: 100%;
   padding: 20px 0;
 }
@@ -3306,7 +3306,9 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .card-testimonials__image {
   position: relative;
   height: 80px;
-  flex: 0 0 80px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 80px;
+          flex: 0 0 80px;
   border-radius: 5px;
   overflow: hidden;
   margin: 0px 15px 0px 0px;
