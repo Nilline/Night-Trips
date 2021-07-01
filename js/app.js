@@ -132,25 +132,6 @@ function getWindowWidth() {
 	return window.innerWidth || document.body.clientWidth;
 }
 
-// if (document.querySelector('.header__search-box')) {
-// 	let searchIcon = document.querySelector('._icon-search');
-// 	let searchInput = document.querySelector('.header__input');
-// 	searchIcon.addEventListener("click", function (e) {
-// 		searchInput.classList.toggle('_active');
-// 		searchIcon.classList.toggle('_active');
-// 	});
-// }
-
-// const iconMenuMy = document.querySelector('.menu__icons');
-// const menuBodyMy = document.querySelector('.menu__bodys');
-// if (iconMenuMy) {
-// 	iconMenuMy.addEventListener("click", function (e) {
-// 		document.body.classList.toggle('_lock');
-// 		iconMenuMy.classList.toggle('_active');
-// 		menuBodyMy.classList.toggle('_active');
-// 	});
-// }
-
 window.onload = function () {
 	document.addEventListener("click", documentActions);
 
