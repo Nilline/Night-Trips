@@ -253,13 +253,11 @@ let delay = 500;
 let menuBody = document.querySelector(".menu__body");
 function menu_open() {
 	if (iconMenu != null) {
-		iconMenu.addEventListener("click", function (e) {
-			if (unlock) {
-				body_lock(delay);
-				iconMenu.classList.toggle("_active");
-				menuBody.classList.toggle("_active");
-			}
-		});
+		if (unlock) {
+			body_lock(delay);
+			iconMenu.classList.toggle("_active");
+			menuBody.classList.toggle("_active");
+		}
 	};
 }
 function menu_close() {
