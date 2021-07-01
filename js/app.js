@@ -132,23 +132,40 @@ function getWindowWidth() {
 	return window.innerWidth || document.body.clientWidth;
 }
 
-if (document.querySelector('.header__search-box')) {
-	let searchIcon = document.querySelector('._icon-search');
-	let searchInput = document.querySelector('.header__input');
-	searchIcon.addEventListener("click", function (e) {
-		searchInput.classList.toggle('_active');
-		searchIcon.classList.toggle('_active');
-	});
-}
+// if (document.querySelector('.header__search-box')) {
+// 	let searchIcon = document.querySelector('._icon-search');
+// 	let searchInput = document.querySelector('.header__input');
+// 	searchIcon.addEventListener("click", function (e) {
+// 		searchInput.classList.toggle('_active');
+// 		searchIcon.classList.toggle('_active');
+// 	});
+// }
 
-const iconMenuMy = document.querySelector('.menu__icons');
-const menuBodyMy = document.querySelector('.menu__bodys');
-if (iconMenuMy) {
-	iconMenuMy.addEventListener("click", function (e) {
-		document.body.classList.toggle('_lock');
-		iconMenuMy.classList.toggle('_active');
-		menuBodyMy.classList.toggle('_active');
-	});
+// const iconMenuMy = document.querySelector('.menu__icons');
+// const menuBodyMy = document.querySelector('.menu__bodys');
+// if (iconMenuMy) {
+// 	iconMenuMy.addEventListener("click", function (e) {
+// 		document.body.classList.toggle('_lock');
+// 		iconMenuMy.classList.toggle('_active');
+// 		menuBodyMy.classList.toggle('_active');
+// 	});
+// }
+
+window.onload = function () {
+	document.addEventListener("click", documentActions);
+
+	function documentActions(e) {
+		const targetElement = e.target;
+
+		if (targetElement.classList.contains('header__search')) {
+			document.querySelector('.header__search-box').classList.toggle('_active');
+			document.querySelector('.header__search').classList.toggle('_hidden');
+			document.querySelector('.header__search-btn').classList.toggle('_active');
+		} else if (!targetElement.closest('.header__search-box') && document.querySelector('.header__search-box._active')) {
+			document.querySelector('.header__search-box').classList.remove('_active');
+			document.querySelector('.header__search').classList.remove('_hidden');
+		}
+	}
 }
 
 // скролл к обьекту
@@ -166,10 +183,8 @@ if (menuLinks.length > 0) {
 			const gotoBlock = document.querySelector(menuLink.dataset.goto);
 			const gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset - document.querySelector('header').offsetHeight;
 
-			if (iconMenuMy.classList.contains('_active')) {
-				document.body.classList.remove('_lock');
-				iconMenuMy.classList.remove('_active');
-				menuBodyMy.classList.remove('_active');
+			if (iconMenu.classList.contains('_active')) {
+				menu_close()
 			}
 
 			window.scrollTo({
@@ -244,24 +259,24 @@ if (location.hash) {
 }
 //=================
 //Menu
-// let iconMenu = document.querySelector(".icon-menu");
-// if (iconMenu != null) {
-// 	let delay = 500;
-// 	let menuBody = document.querySelector(".menu__body");
-// 	iconMenu.addEventListener("click", function (e) {
-// 		if (unlock) {
-// 			body_lock(delay);
-// 			iconMenu.classList.toggle("_active");
-// 			menuBody.classList.toggle("_active");
-// 		}
-// 	});
-// };
-// function menu_close() {
-// 	let iconMenu = document.querySelector(".icon-menu");
-// 	let menuBody = document.querySelector(".menu__body");
-// 	iconMenu.classList.remove("_active");
-// 	menuBody.classList.remove("_active");
-// }
+let iconMenu = document.querySelector(".menu__icon");
+if (iconMenu != null) {
+	let delay = 500;
+	let menuBody = document.querySelector(".menu__body");
+	iconMenu.addEventListener("click", function (e) {
+		if (unlock) {
+			body_lock(delay);
+			iconMenu.classList.toggle("_active");
+			menuBody.classList.toggle("_active");
+		}
+	});
+};
+function menu_close() {
+	let iconMenu = document.querySelector(".icon-menu");
+	let menuBody = document.querySelector(".menu__body");
+	iconMenu.classList.remove("_active");
+	menuBody.classList.remove("_active");
+}
 //=================
 //BodyLock
 function body_lock(delay) {
@@ -1951,10 +1966,10 @@ if (goto_links) {
 }
 function _goto(target_block, speed, offset = 0) {
 	let header = '';
-	//OffsetHeader
-	//if (window.innerWidth < 992) {
-	//	header = 'header';
-	//}
+	// OffsetHeader
+	// if (window.innerWidth < 992) {
+	// 	header = 'header';
+	// }
 	let options = {
 		speedAsDuration: true,
 		speed: speed,
